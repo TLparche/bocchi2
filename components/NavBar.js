@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { IoMenu, IoClose } from 'react-icons/io5';
 import Link from 'next/link';
 
-const NavBar = () => {
+const NavBar = ({tabName}) => {
     const [menuStat, setMenuStat] = useState(false);
 
     const menuChange = () => {
@@ -21,11 +21,15 @@ const NavBar = () => {
                             <img src="kessoku.png" className="w-28 h-16" alt="Logo" />
                         </Link>
                     )}
+                    <div className={"text-3xl font-bold"}>
+                        {tabName}
+                    </div>
+
 
                     {menuStat ? (
-                        <IoClose className="w-16 h-16" onClick={menuChange} />
+                        <IoClose className="w-16 h-16 cursor-pointer" onClick={menuChange} />
                     ) : (
-                        <IoMenu className="w-16 h-16" onClick={menuChange} />
+                        <IoMenu className="w-16 h-16 cursor-pointer" onClick={menuChange} />
                     )}
                 </div>
             </div>
@@ -39,16 +43,24 @@ const NavBar = () => {
                     <img src="kessoku.png" className="w-80 h-40 fixed" alt="Logo" />
                     <ul className="grid grid-cols-2 w-full h-2/3 px-12">
                         <li className="flex items-center justify-center w-full h-full text-5xl font-bold">
-                            Album
+                            <Link href={"/album"}>
+                                <p>Album</p>
+                            </Link>
                         </li>
                         <li className="flex items-center justify-center w-full h-full text-5xl font-bold">
-                            Member
+                            <Link href={"/member"}>
+                                <p>Member</p>
+                            </Link>
                         </li>
                         <li className="flex items-center justify-center w-full h-full text-5xl font-bold">
-                            About
+                            <Link href={"/about"}>
+                                <p>About</p>
+                            </Link>
                         </li>
                         <li className="flex items-center justify-center w-full h-full text-5xl font-bold">
-                            Apply
+                            <Link href={"/apply"}>
+                                <p>Apply</p>
+                            </Link>
                         </li>
                     </ul>
                 </div>
