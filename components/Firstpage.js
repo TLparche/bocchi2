@@ -1,7 +1,6 @@
-"use client";
 import React, {useState, useEffect} from 'react';
-import YouTubePlayer from '@/app/components/YouTubePlayer';
-import NavBar from '@/app/components/NavBar'
+import NavBar from '@/components/NavBar';
+import YouTube from 'react-youtube';
 
 const Firstpage = () => {
     const [scrollOpacity, setScrollOpacity] = useState(0);
@@ -19,6 +18,7 @@ const Firstpage = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             setHidden(true);
@@ -28,6 +28,7 @@ const Firstpage = () => {
             clearTimeout(timeoutId);
         };
     }, []);
+
     const handleTransitionEnd = () => {
         if (hidden) {
             setDisplayNone(true);
@@ -36,20 +37,48 @@ const Firstpage = () => {
     return (
         <div>
             <div>
-                <NavBar/>
+                <NavBar tabName=""/>
             </div>
             <div className="h-screen w-full block relative bg-pink-300">
-                <div className="absolute top-0 left-0 right-0 bg-pink-300 z-30 h-full" style={{opacity: scrollOpacity}}>
-                </div>
+                <div
+                    className={`absolute top-0 left-0 right-0 bg-pink-300 z-30 h-full`}
+                    style={{opacity: scrollOpacity}}
+                ></div>
                 <div
                     className={`h-screen w-full fixed top-0 left-0 right-0 bg-pink-300 transition-opacity duration-1000 z-50 ${
-                        displayNone ? 'hidden' : ''}`}
-                    style={{opacity: hidden ? 0 : 1}} onTransitionEnd={handleTransitionEnd}>
-                    <img src={"kessoku2.png"} alt={"/"} className={"w-full h-screen"}/>
+                        displayNone ? 'hidden' : ''
+                    }`}
+                    style={{opacity: hidden ? 0 : 1}}
+                    onTransitionEnd={handleTransitionEnd}
+                >
+                    <img src={'kessoku2.png'} alt={'/'} className={'w-full h-screen'}/>
                 </div>
-                <div
-                    className="absolute top-0 left-0 right-0 bg-cover bg-center before:block before:pt-[56.25%] z-20 before:z-20">
-                    <YouTubePlayer/>
+                <div>
+                    <div className={"h-screen w-full"}>
+                        <YouTube
+                            className={"h-screen"}
+                            videoId="Yd8kUoB72xU"
+                            opts={{
+                                height: '100%',
+                                width: '100%',
+                                playerVars: {
+                                    'mute': 1,
+                                    'autoplay': 1,
+                                    'controls': 0,
+                                    'showinfo': 0,
+                                    'rel': 0,
+                                    'loop': 1,
+                                    'modestbranding': 1,
+                                    'disablekb': 1,
+                                    'enablejsapi': 1,
+                                    'iv_load_policy': 3,
+                                    'widgetid': 1,
+                                    'quality': 'highres',
+                                    'autohide': 1,
+                                },
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
